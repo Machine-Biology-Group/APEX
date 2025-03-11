@@ -7,6 +7,7 @@ By running predict.py, species-specific antmicrobial activties (MICs) of peptide
 ## Software version
 pytorch: 1.11.0+cu113
 
+## Configuration
 conda create -n apex python==3.9
 
 conda activate apex
