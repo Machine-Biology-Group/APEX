@@ -16,6 +16,8 @@ pip install torch1.11.0+cu113 torchvision0.12.0+cu113 torchaudio==0.11.0 --extra
 
 pip install -r requirement.txt
 
+## Running
+python predict.py test_seqs.txt
 
 ## Contacts
 If you have any questions or comments, please feel free to email Fangping Wan (fangping[dot]wan[at]pennmedicine[dot]upenn[dot]edu) and/or César de la Fuente (cfuente[at]pennmedicine[dot]upenn[dot]edu).
