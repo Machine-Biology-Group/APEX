@@ -5,14 +5,14 @@ By running predict.py, species-specific antmicrobial activties (MICs) of peptide
 
 
 ## Software version
-pytorch: 1.11.0+cu113
+pytorch: 1.11.0+cu113 (These code should run only on a CUDA-capable device)
 
 ## Configuration
 conda create -n apex python==3.9
 
 conda activate apex
 
-pip install torch1.11.0+cu113 torchvision0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
+pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
 
 pip install -r requirement.txt
 
