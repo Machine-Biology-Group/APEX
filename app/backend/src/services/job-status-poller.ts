@@ -70,7 +70,7 @@ const pollJobs = async (): Promise<void> => {
     
     await Promise.all(pendingJobs.map(async job => {
         try {
-            console.info(`Updating status of job ${job.id}...`);
+            console.info(`Updating status of job ${job.id} with lsfJobId=${job.lsfJobId}...`);
             await jobService.updateJobStatus(job);
         } catch (error) {
             console.error(`Error updating job ${job.id}:`, error);

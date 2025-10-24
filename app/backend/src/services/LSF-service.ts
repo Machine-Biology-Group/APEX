@@ -1,5 +1,5 @@
 import { LSFServiceInterface } from './interfaces/LSFServiceInterface.js';
-import { JobResult, JobStatus } from '../models/Job.js';
+import { Job, JobResult, JobStatus } from '../models/Job.js';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
@@ -12,49 +12,46 @@ const submitJob = async (inputFilePath: string, outputFilePath: string): Promise
     await fs.access(inputFilePath);
 
     const command = createSubmitCommand(inputFilePath, outputFilePath);
-    return await submitToLSF(command);
+    const lsfJobId = await submitToLSF(command);
+
+    return lsfJobId;
 };
 
-const isJobCompleted = async (jobId: string, outputDirectory: string): Promise<boolean> => {
-    const { stdout } = await execAsync(`bjobs -noheader ${jobId}`);
-    if (stdout.trim() === '') return true;
-    return stdout.includes('DONE') || stdout.includes('EXIT');
+const isJobCompleted = async (job: Job): Promise<boolean> => {
+    const result = await getJobResult(job);
+    return result.status === JobStatus.COMPLETED || result.status === JobStatus.FAILED;
 };
 
-const getJobResult = async (jobId: string, outputDirectory: string): Promise<JobResult> => {
-    const isCompleted = await isJobCompleted(jobId, outputDirectory);
-    
-    if (!isCompleted) {
-        return { status: JobStatus.RUNNING };
+const getJobResult = async (job: Job): Promise<JobResult> => {
+    if (!job.lsfJobId) {
+        throw new Error('LSF Job ID not present for jobId=' + job.id);
     }
-
-    const outputFilePath = await findJobOutputFile(jobId, outputDirectory);
-    if (!outputFilePath) {
+    const { stdout } = await execAsync(`bjobs -noheader ${job.lsfJobId}`);
+    if (stdout.trim() === ''){
+        return {
+            status: JobStatus.COMPLETED,
+        }
+    } 
+    if (stdout.includes('EXIT')) {
         return {
             status: JobStatus.FAILED,
-            errorMessage: 'Job output file not found'
-        };
+            errorMessage: 'Job failed, check LSF logs for details'
+        }
     }
-
-    const logFilePath = `${outputFilePath}.log`;
-    const jobStatus = await checkJobLogStatus(logFilePath);
-
-    if (jobStatus.failed) {
+    if (stdout.includes('DONE')) {
         return {
-            status: JobStatus.FAILED,
-            errorMessage: 'Job failed, check LSF logs for details',
-            outputFilePath: logFilePath
-        };
+            status: JobStatus.COMPLETED,
+        }
     }
 
+    // Job is still running
     return {
-        status: JobStatus.COMPLETED,
-        outputFilePath
-    };
+        status: JobStatus.RUNNING,
+    }
 };
 
-const checkJobOutputExists = async (jobId: string, outputDirectory: string): Promise<boolean> => {
-    const outputFilePath = await findJobOutputFile(jobId, outputDirectory);
+const checkJobOutputExists = async (job: Job, outputDirectory: string): Promise<boolean> => {
+    const outputFilePath = await findJobOutputFile(job, outputDirectory);
     if (!outputFilePath) return false;
 
     try {
@@ -65,11 +62,14 @@ const checkJobOutputExists = async (jobId: string, outputDirectory: string): Pro
     }
 };
 
-const findJobOutputFile = async (jobId: string, outputDirectory: string): Promise<string | null> => {
+const findJobOutputFile = async (job: Job, outputDirectory: string): Promise<string | null> => {
     try {
-        const files = await fs.readdir(outputDirectory);
-        const outputFile = files.find(file => file.startsWith(`output-${jobId}`));
-        return outputFile ? path.join(outputDirectory, outputFile) : null;
+        const result = await fs.stat(job.outputFilePath as string);
+        console.log("path=", job.outputFilePath, "size=", result.size);
+        if (result.isFile() && result.size > 0) {
+            return job.outputFilePath as string;
+        }
+        return null;
     } catch {
         return null;
     }
@@ -78,7 +78,7 @@ const findJobOutputFile = async (jobId: string, outputDirectory: string): Promis
 // Helper functions ----
 
 const createSubmitCommand = (inputFilePath: string, outputFilePath: string): string => {
-    return `bsub -q 9_lpcgpu -gpu num=1 -e /project/apexgpu_shared/logs/%J.err -o /project/apexgpu_shared/logs/%J.out python APEX_predict.py -i ${inputFilePath} -o ${outputFilePath}`;
+    return `bsub -q 9_lpcgpu -gpu num=1 -e /project/apexgpu_shared/logs/%J.err -o /project/apexgpu_shared/logs/%J.out python /project/apexgpu_shared/apex1.1/APEX_predict.py -i ${inputFilePath} -o ${outputFilePath}`;
 };
 
 const submitToLSF = async (command: string): Promise<string> => {

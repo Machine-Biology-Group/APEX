@@ -1,14 +1,14 @@
-import { JobResult } from "../../models/Job.js";
+import { Job, JobResult } from "../../models/Job.js";
 
 export interface LSFServiceInterface {
     submitJob(inputFilePath: string, outputDirectory: string): Promise<string>;
 
-    isJobCompleted(jobId: string, outputDirectory: string): Promise<boolean>;
+    isJobCompleted(job: Job): Promise<boolean>;
 
-    getJobResult(jobId: string, outputDirectory: string): Promise<JobResult>;
+    getJobResult(job: Job): Promise<JobResult>;
 
 
-    checkJobOutputExists(jobId: string, outputDirectory: string): Promise<boolean>;
+    checkJobOutputExists(job: Job, outputDirectory: string): Promise<boolean>;
 
-    findJobOutputFile(jobId: string, outputDirectory: string): Promise<string | null>;
+    findJobOutputFile(job: Job, outputDirectory: string): Promise<string | null>;
 } 

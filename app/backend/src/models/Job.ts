@@ -27,6 +27,5 @@ export type CreateJobInput = {
 
 export type JobResult = {
   status: JobStatus;
-  outputFilePath?: string;
   errorMessage?: string;
 }; 

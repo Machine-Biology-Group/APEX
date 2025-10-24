@@ -24,7 +24,7 @@ const submitJob = async (jobInput: CreateJobInput): Promise<Job> => {
     const job: Job = {
         id: jobId,
         inputFilePath,
-        outputFilePath: null,
+        outputFilePath,
         status: JobStatus.PENDING,
         lsfJobId,
         errorMessage: null,
@@ -48,15 +48,14 @@ const updateJobStatus = async (job: Job): Promise<Job> => {
         return job;
     }
 
-    const outputDir = path.join(utils.getBasePath(), FOLDERS.OUTPUT);
-    const isCompleted = await lsfService.isJobCompleted(job.lsfJobId as string, outputDir);
+    const isCompleted = await lsfService.isJobCompleted(job);
     if (!isCompleted) {
         return await updateRunningJob(job);
     }
 
-    const result = await lsfService.getJobResult(job.lsfJobId as string, outputDir);
+    const result = await lsfService.getJobResult(job);
     const updatedJob = result.status === JobStatus.COMPLETED
-        ? await handleCompletedJob(job, result.outputFilePath)
+        ? await handleCompletedJob(job)
         : await handleFailedJob(job, result.errorMessage);
 
     if (updatedJob.email) {
@@ -78,11 +77,10 @@ const updateRunningJob = async (job: Job): Promise<Job> => {
     return updatedJob;
 };
 
-const handleCompletedJob = async (job: Job, outputFilePath?: string): Promise<Job> => {
+const handleCompletedJob = async (job: Job): Promise<Job> => {
     const updatedJob = {
         ...job,
         status: JobStatus.COMPLETED,
-        outputFilePath: outputFilePath || null,
         updatedAt: new Date()
     };
     await jobRepository.saveJob(updatedJob);

@@ -36,6 +36,7 @@ npm run build
 
 # Create a database file
 npx prisma migrate deploy
+npx prisma generate
  
 # Run the server
 npm start
@@ -46,6 +47,9 @@ npm run dev
 # Run tests
 npm test
 ```
+
+## Running the systemd service in production:
+sudo /sbin/service api-backend start
 
 ## Mock Mode vs Real Mode
 
