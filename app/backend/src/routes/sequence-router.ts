@@ -5,7 +5,7 @@ import { CreateJobInput } from '../models/Job.js';
 import { log } from "console";
 import rateLimitMiddleware from '../middleware/rate-limit-middleware.js';
 
-const router = new Router({ prefix: '/sequence' });
+const router = new Router({ prefix: '/api/sequence' });
 
 const handleSubmitSequence = async (ctx: Router.RouterContext) => {
     const body = ctx.request.body as { text: string, email: string };

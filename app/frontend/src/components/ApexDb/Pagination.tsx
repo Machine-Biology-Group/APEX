@@ -86,7 +86,7 @@ export const Pagination: FC<PaginationProps> = ({className}) => {
                     </div>
 
                     {totalPageCount > 1 &&
-                        <div className="flex rubik-mono">
+                        <div className="flex">
                             {generatePageNumbers().map((page, index) => (
                                 <button key={index}
                                         className={clsx(pageSwitchersColorClass, page === currentPage ? "bg-primary-300 text-white" :"bg-white",

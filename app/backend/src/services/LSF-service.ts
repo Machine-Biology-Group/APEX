@@ -7,6 +7,7 @@ import fs from 'fs/promises';
 import mockLsfService from "./mock-LSF-service.js";
 
 const execAsync = promisify(exec);
+const profileLsf = `source /lsf/conf/profile.lsf && source /appl/Modules/current/init/bash && module use /appl/Modules/CentOS7 && module use /appl/Modules/RHEL9 && module load tensorflow`;
 
 const submitJob = async (inputFilePath: string, outputFilePath: string): Promise<string> => {
     await fs.access(inputFilePath);
@@ -26,7 +27,7 @@ const getJobResult = async (job: Job): Promise<JobResult> => {
     if (!job.lsfJobId) {
         throw new Error('LSF Job ID not present for jobId=' + job.id);
     }
-    const { stdout } = await execAsync(`bjobs -noheader ${job.lsfJobId}`);
+    const { stdout } = await execAsync(`${profileLsf} && bjobs -noheader ${job.lsfJobId}`);
     if (stdout.trim() === ''){
         return {
             status: JobStatus.COMPLETED,
@@ -78,7 +79,7 @@ const findJobOutputFile = async (job: Job, outputDirectory: string): Promise<str
 // Helper functions ----
 
 const createSubmitCommand = (inputFilePath: string, outputFilePath: string): string => {
-    return `bsub -q 9_lpcgpu -gpu num=1 -e /project/apexgpu_shared/logs/%J.err -o /project/apexgpu_shared/logs/%J.out python /project/apexgpu_shared/apex1.1/APEX_predict.py -i ${inputFilePath} -o ${outputFilePath}`;
+    return `${profileLsf} && bsub -q 9_lpcgpu -gpu num=1 -e /project/apexgpu_shared/logs/%J.err -o /project/apexgpu_shared/logs/%J.out python /project/apexgpu_shared/apex1.1/APEX_predict.py -i ${inputFilePath} -o ${outputFilePath}`;
 };
 
 const submitToLSF = async (command: string): Promise<string> => {

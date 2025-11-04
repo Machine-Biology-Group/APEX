@@ -5,6 +5,7 @@ import { Loader2 } from 'lucide-react';
 type InputType = 'text' | 'file' | null;
 
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL || '';
+console.log(BACKEND_BASE_URL)
 
 export const SequenceForm: FC = () => {
     const [inputType, setInputType] = useState<InputType>(null);
@@ -22,8 +23,8 @@ export const SequenceForm: FC = () => {
         setStatus('idle');
         try {
             const endpoint = inputType === 'file' 
-                ? `${BACKEND_BASE_URL}/sequence/submit-file`
-                : `${BACKEND_BASE_URL}/sequence/submit-text`;
+                ? `${BACKEND_BASE_URL}/api/sequence/submit-file`
+                : `${BACKEND_BASE_URL}/api/sequence/submit-text`;
 
             const formData = new FormData();
             formData.append('email', email);
@@ -56,7 +57,8 @@ export const SequenceForm: FC = () => {
 
     const handleReset = () => {
         setFileContent(null);
-        setInputType(null);
+        setTextContent('');
+        setInputType('text');
         setStatus('idle');
     };
 
@@ -89,62 +91,67 @@ export const SequenceForm: FC = () => {
                 />
 
                 {showTextArea && (
-                    <div className="space-y-4">
-                        <textarea
-                            className="w-full h-24 p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2 border-gray-200"
-                            placeholder="Enter your sequence here..."
-                            value={textContent}
-                            onChange={(e) => {
-                                setTextContent(e.target.value);
-                                setInputType('text');
-                            }}
-                        />
-                        <div className="text-center">
-                            <p className="mb-2">- OR -</p>
-                            <button
-                                onClick={() => setInputType('file')}
-                                className="bg-primary-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90"
-                            >
-                                Upload FASTA file
-                            </button>
-                        </div>
-                    </div>
+                    <textarea
+                        className="w-full h-24 p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2 border-gray-200"
+                        placeholder="Enter your sequence here..."
+                        value={textContent}
+                        onChange={(e) => {
+                            setTextContent(e.target.value);
+                            setInputType('text');
+                            setStatus('idle');
+                        }}
+                    />
                 )}
 
                 {showFileUpload && (
                     <FastaDropzone 
-                        onFileSelect={(file) => setFileContent(file)} 
+                        onFileSelect={(file) => {
+                            setFileContent(file);
+                            setStatus('idle');
+                        }} 
                         className="border-2 border-dashed rounded-xl p-8 border-primary-300"
                     />
                 )}
 
-                <div className="space-y-4">
-                    {fileContent && (
-                        <p className="text-sm text-center text-gray-600">
-                            Selected file: {fileContent.name}
-                        </p>
-                    )}
-                    
-                    {status === 'error' && <p className="text-red-500 text-sm mb-4 text-center">Failed to submit. Please try again.</p>}
-                    {status === 'success' && <p className="text-green-500 text-sm mb-4 text-center">Successfully submitted!</p>}
-                    
-                    <div className="flex gap-4 justify-center">
+                {fileContent && (
+                    <p className="text-sm text-center text-gray-600">
+                        Selected file: {fileContent.name}
+                    </p>
+                )}
+                
+                {status === 'error' && <p className="text-red-500 text-sm mb-4 text-center">Failed to submit. Please try again.</p>}
+                {status === 'success' && <p className="text-green-500 text-sm mb-4 text-center">Successfully submitted!</p>}
+                
+                <div className="flex gap-4 justify-center">
+                    <button
+                        onClick={handleSubmit}
+                        disabled={!email || (!textContent && !fileContent)}
+                        className="bg-primary-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90 disabled:bg-opacity-50"
+                    >
+                        Submit
+                    </button>
+                </div>
+
+                <div className="text-center">
+                    <p className="mb-2">- OR -</p>
+                    {inputType === 'file' ? (
                         <button
-                            onClick={handleSubmit}
-                            disabled={!email || (!textContent && !fileContent)}
-                            className="bg-primary-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90 disabled:bg-opacity-50"
+                            onClick={handleReset}
+                            className="bg-primary-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90"
                         >
-                            Submit
+                            Enter sequence manually
                         </button>
-                        {inputType === 'file' && fileContent && (
-                            <button
-                                onClick={handleReset}
-                                className="bg-gray-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90"
-                            >
-                                Select Another
-                            </button>
-                        )}
-                    </div>
+                    ) : (
+                        <button
+                            onClick={() => {
+                                setInputType('file');
+                                setStatus('idle');
+                            }}
+                            className="bg-primary-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90"
+                        >
+                            Upload FASTA file
+                        </button>
+                    )}
                 </div>
             </div>
         </section>

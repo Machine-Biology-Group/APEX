@@ -6,11 +6,9 @@ import svgr from "vite-plugin-svgr";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svgr(), react(), tsconfigPaths()],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-      },
-    },
+  base: '/',
+  build: {
+    outDir: 'dist',
   },
+ 
 })

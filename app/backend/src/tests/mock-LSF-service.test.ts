@@ -1,5 +1,5 @@
 import mockLsfService from '../services/mock-LSF-service.js';
-import { JobResult, JobStatus } from '../models/Job.js';
+import { JobResult, JobStatus, Job } from '../models/Job.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { testInputFolder, testOutputFolder } from './test-utils.js';
@@ -41,19 +41,53 @@ describe('Mock LSF Service', () => {
         });
 
         it('should initially report job as not completed', async () => {
-            const isCompleted = await mockLsfService.isJobCompleted(jobId, testOutputFolder);
+            const job: Job = {
+                id: jobId,
+                inputFilePath: testInputFile,
+                outputFilePath: null,
+                status: JobStatus.PENDING,
+                lsfJobId: jobId,
+                errorMessage: null,
+                email: null,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+            const isCompleted = await mockLsfService.isJobCompleted(job);
             expect(isCompleted).toBe(false);
         });
         
         it('should return running status for incomplete job', async () => {
-            const result = await mockLsfService.getJobResult(jobId, testOutputFolder);
+            const job: Job = {
+                id: jobId,
+                inputFilePath: testInputFile,
+                outputFilePath: null,
+                status: JobStatus.PENDING,
+                lsfJobId: jobId,
+                errorMessage: null,
+                email: null,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+            const result = await mockLsfService.getJobResult(job);
             expect(result.status).toBe('running');
         });
 
         it('should eventually complete the job', async () => {
+            const job: Job = {
+                id: jobId,
+                inputFilePath: testInputFile,
+                outputFilePath: null,
+                status: JobStatus.PENDING,
+                lsfJobId: jobId,
+                errorMessage: null,
+                email: null,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+            
             const waitForCompletion = async () => {
                 for (let i = 0; i < 10; i++) {
-                    if (await mockLsfService.isJobCompleted(jobId, testOutputFolder)) return true;
+                    if (await mockLsfService.isJobCompleted(job)) return true;
                     await new Promise(resolve => setTimeout(resolve, 600));
                 }
                 return false;
@@ -63,11 +97,22 @@ describe('Mock LSF Service', () => {
         });
         
         it('should provide job results after completion', async () => {
+            const job: Job = {
+                id: jobId,
+                inputFilePath: testInputFile,
+                outputFilePath: null,
+                status: JobStatus.PENDING,
+                lsfJobId: jobId,
+                errorMessage: null,
+                email: null,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+            
             const waitForResult = async (): Promise<JobResult> => {
                 for (let i = 0; i < 20; i++) {
-                    const result = await mockLsfService.getJobResult(jobId, testOutputFolder);
+                    const result = await mockLsfService.getJobResult(job);
                     if (result.status === JobStatus.COMPLETED) {
-                        expect(result.outputFilePath?.startsWith(testOutputFolder)).toBe(true);
                         return result;
                     }
                     await new Promise(resolve => setTimeout(resolve, 200));
@@ -77,22 +122,27 @@ describe('Mock LSF Service', () => {
 
             const result = await waitForResult();
             expect(result.status).toBe(JobStatus.COMPLETED);
-            expect(result.outputFilePath).toBeDefined();
-
-            // Wait a bit more to ensure file is written
-            await new Promise(resolve => setTimeout(resolve, 200));
-
-            const outputContent = await fs.readFile(result.outputFilePath!, 'utf-8');
-            expect(outputContent).toContain('PROCESSED:');
         });
     });
     
     describe('error handling', () => {
         it('should throw error for non-existent job ID', async () => {
-            await expect(mockLsfService.isJobCompleted('non-existent-id', testOutputFolder))
+            const nonExistentJob: Job = {
+                id: 'non-existent-id',
+                inputFilePath: 'non-existent-file',
+                outputFilePath: null,
+                status: JobStatus.PENDING,
+                lsfJobId: 'non-existent-id',
+                errorMessage: null,
+                email: null,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+            
+            await expect(mockLsfService.isJobCompleted(nonExistentJob))
                 .rejects.toThrow('Job not found');
                 
-            await expect(mockLsfService.getJobResult('non-existent-id', testOutputFolder))
+            await expect(mockLsfService.getJobResult(nonExistentJob))
                 .rejects.toThrow('Job not found');
         });
     });

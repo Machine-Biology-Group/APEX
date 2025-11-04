@@ -59,7 +59,7 @@ async function sendEmail(message: Mail.Options) {
         console.log("Email sent: " + result);
         return result;
     } catch (error: any) {
-        console.log("error")
+        console.log("error sending email:")
         console.log(error.message);
         throw error;
     }

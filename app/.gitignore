@@ -1,2 +1,10 @@
 .idea
 .env
+
+node_modules
+dist
+build
+.env*
+.~lock*
+.netlify/*
+.idea

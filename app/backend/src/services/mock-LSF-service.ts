@@ -1,10 +1,10 @@
 import { LSFServiceInterface } from './interfaces/LSFServiceInterface.js';
-import { JobResult, JobStatus } from '../models/Job.js';
+import { Job, JobResult, JobStatus } from '../models/Job.js';
 import crypto from 'crypto';
 import fs from 'fs/promises';
 import path from 'path';
 
-const submitJob = async (inputFilePath: string, outputDirectory: string): Promise<string> => {
+const submitJob = async (inputFilePath: string, outputFilePath: string): Promise<string> => {
     try {
         await fs.access(inputFilePath);
     } catch (error) {
@@ -12,7 +12,6 @@ const submitJob = async (inputFilePath: string, outputDirectory: string): Promis
     }
     
     const jobId = crypto.randomUUID();
-    const outputFilePath = await createOutputFilePath(inputFilePath, outputDirectory);
     
     jobs.set(jobId, {
         id: jobId,
@@ -26,15 +25,15 @@ const submitJob = async (inputFilePath: string, outputDirectory: string): Promis
     return jobId;
 };
 
-const isJobCompleted = async (jobId: string, outputDirectory: string): Promise<boolean> => {
-    const job = getJob(jobId);
-    return job.completed;
+const isJobCompleted = async (job: Job): Promise<boolean> => {
+    const mockJob = getJob(job.id);
+    return mockJob.completed;
 };
 
-const getJobResult = async (jobId: string, outputDirectory: string): Promise<JobResult> => {
-    const job = getJob(jobId);
+const getJobResult = async (job: Job): Promise<JobResult> => {
+    const mockJob = getJob(job.id);
     
-    if (!job.completed) {
+    if (!mockJob.completed) {
         return {
             status: JobStatus.RUNNING
         };
@@ -42,28 +41,26 @@ const getJobResult = async (jobId: string, outputDirectory: string): Promise<Job
     
     return {
         status: JobStatus.COMPLETED,
-        outputFilePath: job.outputFilePath
     };
 };
 
-const checkJobOutputExists = async (jobId: string, outputDirectory: string): Promise<boolean> => {
-    const job = getJob(jobId);
+const checkJobOutputExists = async (job: Job, outputDirectory: string): Promise<boolean> => {
+    const mockJob = getJob(job.id);
     
     try {
-        await fs.access(job.outputFilePath);
+        await fs.access(mockJob.outputFilePath);
         return true;
     } catch {
         return false;
     }
 };
 
-const findJobOutputFile = async (jobId: string, outputDirectory: string): Promise<string | null> => {
-    const job = jobs.get(jobId);
-    if (!job) return null;
+const findJobOutputFile = async (job: Job, outputDirectory: string): Promise<string | null> => {
+    const mockJob = getJob(job.id);
     
     try {
-        await fs.access(job.outputFilePath);
-        return job.outputFilePath;
+        await fs.access(mockJob.outputFilePath);
+        return mockJob.outputFilePath;
     } catch {
         return null;
     }
@@ -89,11 +86,6 @@ const getJob = (jobId: string) => {
     return job;
 };
 
-const createOutputFilePath = async (inputFilePath: string, outputDirectory: string): Promise<string> => {
-    const inputFileName = path.basename(inputFilePath);
-    await fs.mkdir(outputDirectory, { recursive: true });
-    return path.join(outputDirectory, `output-${inputFileName}`);
-};
 
 const processMockJob = async (jobId: string, processingTimeMs = DEFAULT_PROCESSING_TIME_MS): Promise<void> => {
     const job = getJob(jobId);
