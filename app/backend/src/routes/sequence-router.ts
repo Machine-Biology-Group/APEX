@@ -24,6 +24,12 @@ const handleSubmitSequence = async (ctx: Router.RouterContext) => {
         return;
     }
 
+    if (text.length > 20000) {
+        ctx.status = 400;
+        ctx.body = { error: 'Sequence text exceeds the maximum limit of 20000 characters' };
+        return;
+    }
+
     const jobInput: CreateJobInput = { 
         sequence: text, 
         email: email 

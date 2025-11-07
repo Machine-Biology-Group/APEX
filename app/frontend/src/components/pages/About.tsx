@@ -7,13 +7,15 @@ export const About: FC<AboutProps> = ({}) => {
     const content = `
 ## About us
 
-The de la Fuente Lab at the University of Pennsylvania is at the forefront of computational biology and antimicrobial research. Our work focuses on developing innovative approaches to combat infectious diseases through machine learning and synthetic biology.
+De la Fuente Lab/Machine Biology Group
+
+We use the power of machines to accelerate discoveries in biology and medicine
 
 ## CONTACT
 
 Cesar de la Fuente, Ph.D. (cfuente@upenn.edu)
 
-To apply to become a graduate student in the lab, please first apply to a PhD program at the University of Pennsylvania. For other positions, please contact Cesar de Fuente.
+To apply to become a graduate student in the lab, please first apply to a Ph.D. program at the University of Pennsylvania. For other positions, please contact Prof. Cesar de la Fuente.
 
 Website: [delafuentelab.seas.upenn.edu](https://delafuentelab.seas.upenn.edu/)
 `;

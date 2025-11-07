@@ -31,7 +31,25 @@ if (isDevelopment) {
     }));
 }
 
-const upload = multer();
+const upload = multer({
+    limits: {
+        fileSize: 50 * 1024 * 1024 // 50MB
+    }
+});
+
+// Error handling middleware for multer file size errors
+app.use(async (ctx, next) => {
+    try {
+        await next();
+    } catch (err: any) {
+        if (err.code === 'LIMIT_FILE_SIZE') {
+            ctx.status = 413;
+            ctx.body = { error: 'File size exceeds the maximum limit of 50MB' };
+            return;
+        }
+        throw err;
+    }
+});
 
 app.use(upload.any());
 app.use(bodyParser());

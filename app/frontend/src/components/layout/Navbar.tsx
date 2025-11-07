@@ -30,8 +30,8 @@ export const Navbar: FC<NavbarProps> = ({}) => {
 
     const pages = [
         {path: "/home", title: "Home"},
-        {path: "/database", title: <span>APEX<sub className="align-baseline relative bottom-0 text-xs">DB</sub></span>},
-        {path: "/stats", title: <span>APEX<sub className="align-baseline relative bottom-0 text-xs">DB</sub> Stats</span>},
+        {path: "/database", title: "ApexDB"},
+        {path: "/stats", title: "ApexDB Stats"},
         {path: "/publications", title: "Publications"},
         {path: "/about", title: "The Lab"}
     ];
@@ -65,7 +65,7 @@ export const Navbar: FC<NavbarProps> = ({}) => {
                         onClick={toggleBurger} 
                         className="flex items-center space-x-1 py-2 text-gray-700 hover:text-gray-900 rounded-md hover:bg-gray-200 border border-transparent hover:border-gray-300 hover:shadow-sm p-2"
                     >
-                        <span className={clsx("text-primary-500 text-2xl")}>APEX<sub className=" align-baseline relative bottom-0 text-xs">SEARCH</sub></span>
+                        <span className={clsx("text-primary-500 text-2xl")}>ApexSearch</span>
                         <ChevronDownIcon className="h-4 w-4" />
                     </button>
                     {isOpenBurger && (

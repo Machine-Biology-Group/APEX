@@ -7,19 +7,21 @@ const publicationSections = [
   {
     title: "APEX",
     content: `
-[Wan, F.; Torres, M.D.T.; Peng, J.; de la Fuente-Nunez, C. Deep-learning-enabled antibiotic discovery through molecular de-extinction. Nature Biomedical Engineering, 8, 854–871, 2024. DOI: 0.1038/s41551-024-01201-x](https://www.nature.com/articles/s41551-024-01201-x)
+[Wan, F.; Torres, M.D.T.; Peng, J.; de la Fuente-Nunez, C. Deep-learning-enabled antibiotic discovery through molecular de-extinction. Nature Biomedical Engineering, 8, 854–871, 2024. DOI: 10.1038/s41551-024-01201-x.](https://www.nature.com/articles/s41551-024-01201-x)
 
-Wan, F.; Torres, M.D.T.; Guan, C.; de la Fuente-Nunez, C. Accelerating antibiotic discovery through computational genome and proteome mining. Nature Protocols, 2025. In press.
+[Wan, F.; Torres, M. D. T.; Guan, C.; de la Fuente-Nunez, C. Tutorial: guidelines for the use of machine learning methods to mine genomes and proteomes for antibiotic discovery. Nature Protocols, 20, 2685-2697, 2025. DOI: 10.1038/s41596-025-01144-w.](https://www.nature.com/articles/s41596-025-01144-w)
 
-[Guan, C.; Torres, M.D.T.; Li, S.; de la Fuente-Nunez, C. Venomics AI: a computational exploration of the global venoms for antibiotic discovery. 2025. bioRXiv.](https://doi.org/10.1101/2024.12.17.628923)
+[Guan, C.; Torres, M.D.T.; Li, S.; de la Fuente-Nunez, C. Computational exploration of global venoms for antimicrobial discovery with Venomics artificial intelligence. Nature Communications, 16, 6446, 2025. DOI: 10.1038/s41467-025-60051-6.](https://www.nature.com/articles/s41467-025-60051-6)
 
-[Cesaro, A.; Wan, F.; Torres, M.D.T.; de la Fuente-Nunez, C. Design of multimodal antibiotics against intracellular infections using deep learning. 2025. bioRXiv.](https://doi.org/10.1101/2024.12.20.629780)
+[Torres, M. D. T.; Wan, F.; de la Fuente-Nunez, C. Deep learning reveals antibiotics in the archaeal proteome, Nature Microbiology, 10, 2153-2167, 2025. DOI: https://doi.org/10.1038/s41564-025-02061-0](https://doi.org/10.1038/s41564-025-02061-0)
 
-[Torres, M.D.T.; Zeng, Y.; Wan, F.; Maus, N.; Gardner, J.; de la Fuente-Nunez, C. A generative artificial intelligence approach for antibiotic optimization. 2025. bioRXiv.](https://doi.org/10.1101/2024.11.27.625757)
+[Cesaro, A.; Wan, F.; Torres, M.D.T.; de la Fuente-Nunez, C. Design of multimodal antibiotics against intracellular infections using deep learning. bioRXiv, 2025.](https://www.biorxiv.org/content/10.1101/2024.12.20.629780v2)
 
-[Torres, M.D.T.; Wan, F.; de la Fuente-Nunez, C. Discovery of antibiotics in the archaeome using deep learning. 2025. bioRXiv.](https://doi.org/10.1101/2024.11.15.623859)
+[Leng, T.; Wan, F.; Torres, M. D. T.; de la Fuente-Nunez, C. Predicting and generating antibiotics against future pathogens with ApexOracle. arXiv, 2025.](https://arxiv.org/abs/2507.07862)
 
-[Xia, X.; Torres, M.D.T.; de la Fuente-Nunez, C. Proteasome-derived antimicrobial peptides discovered via deep learning. 2025. bioRXiv.](https://www.biorxiv.org/content/10.1101/2025.03.17.643752v1.abstract)`
+[Torres, M.D.T.; Zeng, Y.; Wan, F.; Maus, N.; Gardner, J.; de la Fuente-Nunez, C. A generative artificial intelligence approach for antibiotic optimization. bioRXiv, 2025.](https://www.biorxiv.org/content/10.1101/2024.11.27.625757v1)
+
+[Xia, X.; Torres, M.D.T.; de la Fuente-Nunez, C. Proteasome-derived antimicrobial peptides discovered via deep learning. bioRXiv, 2025.](https://www.biorxiv.org/content/10.1101/2025.03.17.643752v1.abstract)`
   },
   {
     title: "Molecular de-extinction",

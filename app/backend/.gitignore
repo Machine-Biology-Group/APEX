@@ -39,3 +39,6 @@ src/tests/test-files/*
 
 # lock files
 *-journal
+
+
+data/input_files/*

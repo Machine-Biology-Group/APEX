@@ -14,6 +14,7 @@ export const SequenceForm: FC = () => {
     const [fileContent, setFileContent] = useState<File | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [fileSizeError, setFileSizeError] = useState<string | null>(null);
 
     const handleSubmit = async () => {
         if (!email) return;
@@ -60,6 +61,7 @@ export const SequenceForm: FC = () => {
         setTextContent('');
         setInputType('text');
         setStatus('idle');
+        setFileSizeError(null);
     };
 
     if (isLoading) {
@@ -79,7 +81,7 @@ export const SequenceForm: FC = () => {
 
     return (
         <section className="h-[90vh] flex flex-col items-center justify-center px-4 mt-[-100px]">
-            <h1 className="text-3xl text-gray-800 mb-8">Upload your sequence</h1>
+            <h1 className="text-3xl text-gray-800 mb-8">Discover your own antibiotics</h1>
             
             <div className="w-full max-w-2xl space-y-4">
                 <input
@@ -91,16 +93,23 @@ export const SequenceForm: FC = () => {
                 />
 
                 {showTextArea && (
-                    <textarea
-                        className="w-full h-24 p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2 border-gray-200"
-                        placeholder="Enter your sequence here..."
-                        value={textContent}
-                        onChange={(e) => {
-                            setTextContent(e.target.value);
-                            setInputType('text');
-                            setStatus('idle');
-                        }}
-                    />
+                    <div>
+                        <textarea
+                            className="w-full h-24 p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2 border-gray-200"
+                            placeholder="Enter your sequence in FASTA format here..."
+                            value={textContent}
+                            maxLength={20000}
+                            onChange={(e) => {
+                                const value = e.target.value.slice(0, 20000);
+                                setTextContent(value);
+                                setInputType('text');
+                                setStatus('idle');
+                            }}
+                        />
+                        <p className="text-xs text-gray-400 text-right mt-1">
+                            {textContent.length}/20000
+                        </p>
+                    </div>
                 )}
 
                 {showFileUpload && (
@@ -108,7 +117,11 @@ export const SequenceForm: FC = () => {
                         onFileSelect={(file) => {
                             setFileContent(file);
                             setStatus('idle');
-                        }} 
+                            setFileSizeError(null);
+                        }}
+                        onFileRejected={(error) => {
+                            setFileSizeError(error);
+                        }}
                         className="border-2 border-dashed rounded-xl p-8 border-primary-300"
                     />
                 )}
@@ -119,6 +132,7 @@ export const SequenceForm: FC = () => {
                     </p>
                 )}
                 
+                {fileSizeError && <p className="text-red-500 text-sm mb-4 text-center">{fileSizeError}</p>}
                 {status === 'error' && <p className="text-red-500 text-sm mb-4 text-center">Failed to submit. Please try again.</p>}
                 {status === 'success' && <p className="text-green-500 text-sm mb-4 text-center">Successfully submitted!</p>}
                 
@@ -146,6 +160,7 @@ export const SequenceForm: FC = () => {
                             onClick={() => {
                                 setInputType('file');
                                 setStatus('idle');
+                                setFileSizeError(null);
                             }}
                             className="bg-primary-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90"
                         >

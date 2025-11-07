@@ -1,7 +1,7 @@
 const homeTexts = {
     title: "Give us your peptides",
     titleButtonText: "Upload",
-    titleButtonPlaceholder: "Enter your sequence here ",
+    titleButtonPlaceholder: "Enter your sequence in FASTA format here...",
     stats: [
         {name: "Monomer", value: 233},
         {name: "Multimer", value: 1000},
@@ -16,7 +16,7 @@ const homeTexts = {
     citationsAndAttribution: `
 [Torres, M.D.T.; Wan, F.; de la Fuente-Nunez, C. Antibiotic Discovery for all with APEXSEARCH. XX, X, XX-XX, 2025. DOI: X](X)
 
-[Wan, F.; Torres, M.D.T.; Peng, J.; de la Fuente-Nunez, C. Deep-learning-enabled antibiotic discovery through molecular de-extinction. Nature Biomedical Engineering, 8, 854–871, 2024. DOI: 0.1038/s41551-024-01201-x](https://www.nature.com/articles/s41551-024-01201-x)
+[Torres, M. D. T.; Wan, F.; de la Fuente-Nunez, C. Deep learning reveals antibiotics in the archaeal proteome, Nature Microbiology, 10, 2153-2167, 2025. DOI: 10.1038/s41564-025-02061-0.](https://www.nature.com/articles/s41564-025-02061-0)
 `
 }
 

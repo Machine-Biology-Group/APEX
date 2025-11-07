@@ -9,9 +9,9 @@ export const ApexDbHeader: FC<HeaderProps> = ({className}) => {
     return (
         <div className={clsx("sm:flex sm:items-center mb-10", className)}>
             <div className="sm:flex-auto">
-                <h1 className="text-base font-semibold leading-6 text-gray-900">Peptides</h1>
+                <h1 className="text-base font-semibold leading-6 text-gray-900">Database</h1>
                 <p className="mt-2 text-gray-800">
-                    A list of all the peptides we have processed so far.
+                    All the sequences used to train Apex.
                 </p>
             </div>
             <div className="mt-4 sm:ml-16 sm:mt-0">

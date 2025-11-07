@@ -6,16 +6,25 @@ import { FileText, Loader2, MousePointerSquareDashed } from 'lucide-react'
 export type DropzoneProps = {
     className?: string;
     onFileSelect?: (file: File) => void;
+    onFileRejected?: (error: string) => void;
 }
 
-export const FastaDropzone: FC<DropzoneProps> = ({ className, onFileSelect }) => {
+export const FastaDropzone: FC<DropzoneProps> = ({ className, onFileSelect, onFileRejected }) => {
     const [isDragOver, setIsDragOver] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     
     const onDropRejected = (rejectedFiles: FileRejection[]) => {
         const [file] = rejectedFiles;
         setIsDragOver(false);
-        console.error(`${file.file.name} is not a valid FASTA file`);
+        
+        if (file.errors.some(err => err.code === 'file-too-large')) {
+            const errorMsg = `File "${file.file.name}" is too large. Maximum file size is 50MB.`;
+            onFileRejected?.(errorMsg);
+        } else {
+            const errorMsg = `${file.file.name} is not a valid FASTA file`;
+            console.error(errorMsg);
+            onFileRejected?.(errorMsg);
+        }
     }
     
     const onDropAccepted = (acceptedFiles: File[]) => {
@@ -33,6 +42,7 @@ export const FastaDropzone: FC<DropzoneProps> = ({ className, onFileSelect }) =>
                     'application/fasta': ['.fasta'],
                     'text/plain': ['.fasta']
                 }}
+                maxSize={50 * 1024 * 1024}
                 onDragEnter={() => setIsDragOver(true)}
                 onDragLeave={() => setIsDragOver(false)}>
                 {({ getRootProps, getInputProps }) => (

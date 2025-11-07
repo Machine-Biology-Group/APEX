@@ -61,7 +61,7 @@ async function sendEmail(message: Mail.Options) {
 }
 ```
 
-### 4. Environment Configuration
+### 3. Environment Configuration
 
 #### Backend (.env file)
 ```bash
@@ -75,7 +75,7 @@ EMAIL_FROM=no-reply@yourdomain.internal
 # Remove or comment out the old DuoCircle key
 # EMAIL_PROVIDER_API_KEY=qweqwqweqwe
 ```
-### 7. Deployment Considerations
+### 4. Deployment Considerations
 
 #### Backend Deployment
 1. Update the `.env` file on the production server
