@@ -69,6 +69,13 @@ NOTE: as of writing this, the frontend is not set up to be deployed to apex1.
    # Option 3: Manual copy via SFTP/FileZilla
    # Copy contents of frontend/dist/ to /data/nodeapp/frontend/dist
 ```
+3. Restart the systemd service:
+```bash
+   ssh user@apex1
+   sudo /sbin/service api-backend restart
+```
+
+
 ## Configuration
 The app in configured via Environment variables.
 
