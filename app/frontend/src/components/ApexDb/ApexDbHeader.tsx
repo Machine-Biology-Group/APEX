@@ -1,17 +1,20 @@
 import React, {FC} from 'react';
 import clsx from 'clsx';
+import {appTexts} from "../../texts";
 
 export type HeaderProps = {
     className?: string
 }
 
 export const ApexDbHeader: FC<HeaderProps> = ({className}) => {
+    const texts = appTexts.apexDbHeaderTexts;
+    
     return (
         <div className={clsx("sm:flex sm:items-center mb-10", className)}>
             <div className="sm:flex-auto">
-                <h1 className="text-base font-semibold leading-6 text-gray-900">Database</h1>
+                <h1 className="text-base font-semibold leading-6 text-gray-900">{texts.title}</h1>
                 <p className="mt-2 text-gray-800">
-                    All the sequences used to train Apex.
+                    {texts.description}
                 </p>
             </div>
             <div className="mt-4 sm:ml-16 sm:mt-0">
@@ -20,7 +23,7 @@ export const ApexDbHeader: FC<HeaderProps> = ({className}) => {
                     download
                     className="inline-flex items-center rounded-md bg-primary-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-300"
                 >
-                    Download Database.csv
+                    {texts.downloadButton}
                 </a>
             </div>
         </div>

@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import clsx from 'clsx';
 import Dropzone, { FileRejection } from 'react-dropzone'
 import { FileText, Loader2, MousePointerSquareDashed } from 'lucide-react'
+import {appTexts} from "../../texts";
 
 export type DropzoneProps = {
     className?: string;
@@ -12,16 +13,17 @@ export type DropzoneProps = {
 export const FastaDropzone: FC<DropzoneProps> = ({ className, onFileSelect, onFileRejected }) => {
     const [isDragOver, setIsDragOver] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const texts = appTexts.dropzoneTexts;
     
     const onDropRejected = (rejectedFiles: FileRejection[]) => {
         const [file] = rejectedFiles;
         setIsDragOver(false);
         
         if (file.errors.some(err => err.code === 'file-too-large')) {
-            const errorMsg = `File "${file.file.name}" is too large. Maximum file size is 50MB.`;
+            const errorMsg = `${texts.fileTooLargePrefix}${file.file.name}${texts.fileTooLargeSuffix}`;
             onFileRejected?.(errorMsg);
         } else {
-            const errorMsg = `${file.file.name} is not a valid FASTA file`;
+            const errorMsg = `${file.file.name}${texts.invalidFileSuffix}`;
             console.error(errorMsg);
             onFileRejected?.(errorMsg);
         }
@@ -60,21 +62,20 @@ export const FastaDropzone: FC<DropzoneProps> = ({ className, onFileSelect, onFi
                         <div className='flex flex-col justify-center mb-2 text-sm text-foreground'>
                             {isLoading ? (
                                 <div className='flex flex-col items-center'>
-                                    <p>Processing...</p>
+                                    <p>{texts.processing}</p>
                                 </div>
                             ) : isDragOver ? (
                                 <p>
-                                    <span className='font-semibold'>Drop file</span> to upload
+                                    <span className='font-semibold'>{texts.dropFile}</span> {texts.toUpload}
                                 </p>
                             ) : (
                                 <p>
-                                    <span className='font-semibold'>Click to upload</span> or
-                                    drag and drop
+                                    <span className='font-semibold'>{texts.clickToUpload}</span> {texts.dragAndDrop}
                                 </p>
                             )}
                         </div>
 
-                        <p className='text-xs text-muted-foreground'>FASTA files only</p>
+                        <p className='text-xs text-muted-foreground'>{texts.fastaFilesOnly}</p>
                     </div>
                 )}
             </Dropzone>

@@ -4,6 +4,7 @@ import clsx from "clsx";
 import {Logo} from "./Logo";
 import {ChevronDownIcon} from "@heroicons/react/24/outline";
 import {Link} from "react-router-dom";
+import {appTexts} from "../../texts";
 
 export type NavbarProps = {}
 
@@ -28,12 +29,13 @@ export const Navbar: FC<NavbarProps> = ({}) => {
         setOpenBurger(false);
     };
 
+    const navbarTexts = appTexts.navbarTexts;
     const pages = [
-        {path: "/home", title: "Home"},
-        {path: "/database", title: "ApexDB"},
-        {path: "/stats", title: "ApexDB Stats"},
-        {path: "/publications", title: "Publications"},
-        {path: "/about", title: "The Lab"}
+        {path: "/home", title: navbarTexts.menuItems.home},
+        {path: "/database", title: navbarTexts.menuItems.apexDb},
+        {path: "/stats", title: navbarTexts.menuItems.stats},
+        {path: "/publications", title: navbarTexts.menuItems.publications},
+        {path: "/about", title: navbarTexts.menuItems.about}
     ];
 
     const menuRef = useRef<HTMLDivElement>(null);
@@ -65,7 +67,7 @@ export const Navbar: FC<NavbarProps> = ({}) => {
                         onClick={toggleBurger} 
                         className="flex items-center space-x-1 py-2 text-gray-700 hover:text-gray-900 rounded-md hover:bg-gray-200 border border-transparent hover:border-gray-300 hover:shadow-sm p-2"
                     >
-                        <span className={clsx("text-primary-500 text-2xl")}>ApexSearch</span>
+                        <span className={clsx("text-primary-500 text-2xl")}>{navbarTexts.brandName}</span>
                         <ChevronDownIcon className="h-4 w-4" />
                     </button>
                     {isOpenBurger && (

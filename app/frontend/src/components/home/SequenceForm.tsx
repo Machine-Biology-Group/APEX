@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { FastaDropzone } from './Dropzone';
 import { Loader2 } from 'lucide-react';
+import {appTexts} from "../../texts";
 
 type InputType = 'text' | 'file' | null;
 
@@ -8,6 +9,7 @@ const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL || '';
 console.log(BACKEND_BASE_URL)
 
 export const SequenceForm: FC = () => {
+    const texts = appTexts.sequenceFormTexts;
     const [inputType, setInputType] = useState<InputType>(null);
     const [email, setEmail] = useState('');
     const [textContent, setTextContent] = useState('');
@@ -69,7 +71,7 @@ export const SequenceForm: FC = () => {
             <section className="h-[90vh] flex flex-col items-center justify-center px-4 mt-[-100px]">
                 <div className="flex flex-col items-center justify-center">
                     <Loader2 className="animate-spin h-8 w-8 mb-4" />
-                    <p>Submitting...</p>
+                    <p>{texts.submitting}</p>
                 </div>
             </section>
         );
@@ -81,12 +83,12 @@ export const SequenceForm: FC = () => {
 
     return (
         <section className="h-[90vh] flex flex-col items-center justify-center px-4 mt-[-100px]">
-            <h1 className="text-3xl text-gray-800 mb-8">Discover your own antibiotics</h1>
+            <h1 className="text-3xl text-gray-800 mb-8">{texts.title}</h1>
             
             <div className="w-full max-w-2xl space-y-4">
                 <input
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder={texts.emailPlaceholder}
                     className="w-full p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2 border-gray-200"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -96,7 +98,7 @@ export const SequenceForm: FC = () => {
                     <div>
                         <textarea
                             className="w-full h-24 p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2 border-gray-200"
-                            placeholder="Enter your sequence in FASTA format here..."
+                            placeholder={texts.sequencePlaceholder}
                             value={textContent}
                             maxLength={20000}
                             onChange={(e) => {
@@ -107,7 +109,7 @@ export const SequenceForm: FC = () => {
                             }}
                         />
                         <p className="text-xs text-gray-400 text-right mt-1">
-                            {textContent.length}/20000
+                            {textContent.length}{texts.characterCount}
                         </p>
                     </div>
                 )}
@@ -128,13 +130,13 @@ export const SequenceForm: FC = () => {
 
                 {fileContent && (
                     <p className="text-sm text-center text-gray-600">
-                        Selected file: {fileContent.name}
+                        {texts.selectedFile}{fileContent.name}
                     </p>
                 )}
                 
                 {fileSizeError && <p className="text-red-500 text-sm mb-4 text-center">{fileSizeError}</p>}
-                {status === 'error' && <p className="text-red-500 text-sm mb-4 text-center">Failed to submit. Please try again.</p>}
-                {status === 'success' && <p className="text-green-500 text-sm mb-4 text-center">Successfully submitted!</p>}
+                {status === 'error' && <p className="text-red-500 text-sm mb-4 text-center">{texts.submitError}</p>}
+                {status === 'success' && <p className="text-green-500 text-sm mb-4 text-center">{texts.submitSuccess}</p>}
                 
                 <div className="flex gap-4 justify-center">
                     <button
@@ -142,18 +144,18 @@ export const SequenceForm: FC = () => {
                         disabled={!email || (!textContent && !fileContent)}
                         className="bg-primary-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90 disabled:bg-opacity-50"
                     >
-                        Submit
+                        {texts.submitButton}
                     </button>
                 </div>
 
                 <div className="text-center">
-                    <p className="mb-2">- OR -</p>
+                    <p className="mb-2">{texts.orDivider}</p>
                     {inputType === 'file' ? (
                         <button
                             onClick={handleReset}
                             className="bg-primary-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90"
                         >
-                            Enter sequence manually
+                            {texts.enterManuallyButton}
                         </button>
                     ) : (
                         <button
@@ -164,7 +166,7 @@ export const SequenceForm: FC = () => {
                             }}
                             className="bg-primary-500 text-white rounded-md px-8 py-3 font-semibold text-base hover:bg-opacity-90"
                         >
-                            Upload FASTA file
+                            {texts.uploadFileButton}
                         </button>
                     )}
                 </div>

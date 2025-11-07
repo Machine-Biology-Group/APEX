@@ -21,23 +21,184 @@ const homeTexts = {
 }
 
 const aboutTexts = {
-    text: `## Overview
-A popular AI chat tool generated this text to fill the about page. The APEX database of AI-sourced peptides has been developed to offer users comprehensive details on experimentally validated peptides, including their chemical structure and efficacy against specific biological targets. The database is meticulously curated and includes information on ribosomal, nonribosomal, and synthetic peptides known for their biological activity, categorized as Monomers, Multimers, and Multi-Peptides.
+    title: "The Lab",
+    text: `## About us
 
-Monomer – comprises a single polypeptide chain (for example, PeptideX, PeptideY).
+De la Fuente Lab/Machine Biology Group
 
+We use the power of machines to accelerate discoveries in biology and medicine
 
-Multimer – consists of two or more polypeptide chains linked by interchain covalent bonds (for example, PeptideA, PeptideB).
+## CONTACT
 
-Multi-Peptide – involves two or more distinct polypeptide chains without interchain covalent bonds. Their biological activity depends on the synergistic interaction between the peptides at equimolar concentrations, as individual peptides may exhibit minimal or no activity on their own (for example, PeptideM, PeptideN).
+Cesar de la Fuente, Ph.D. (cfuente@upenn.edu)
 
-The project was initially supported by the National Science Foundation of CountryX and the Research Council of CountryY.
+To apply to become a graduate student in the lab, please first apply to a Ph.D. program at the University of Pennsylvania. For other positions, please contact Prof. Cesar de la Fuente.
 
-It is now a collaborative effort between the Laboratory of Computational Biology at the Center for Advanced Biomedical Research (CABR, CountryX) and the Division of Computational Biology and Bioinformatics (DCBB/NIAID/NIH, USA).
-
+Website: [delafuentelab.seas.upenn.edu](https://delafuentelab.seas.upenn.edu/)
 `,
     downloadFileDescription:"Previous work can be downloaded here:",
     downloadFileButton:"Download",
+}
+
+const sequenceFormTexts = {
+    title: "Discover your own antibiotics",
+    emailPlaceholder: "Enter your email",
+    sequencePlaceholder: "Enter your sequence in FASTA format here...",
+    characterCount: "/20000",
+    submitting: "Submitting...",
+    submitButton: "Submit",
+    orDivider: "- OR -",
+    enterManuallyButton: "Enter sequence manually",
+    uploadFileButton: "Upload FASTA file",
+    selectedFile: "Selected file: ",
+    submitSuccess: "Successfully submitted!",
+    submitError: "Failed to submit. Please try again.",
+}
+
+const publicationsTexts = {
+    pageTitle: "Publications",
+    apexSectionTitle: "APEX",
+    molecularDeExtinctionSectionTitle: "Molecular de-extinction",
+    encryptedPeptidesSectionTitle: "Encrypted peptides",
+    viewAllButton: "View All Publications",
+    apexContent: `
+[Wan, F.; Torres, M.D.T.; Peng, J.; de la Fuente-Nunez, C. Deep-learning-enabled antibiotic discovery through molecular de-extinction. Nature Biomedical Engineering, 8, 854–871, 2024. DOI: 10.1038/s41551-024-01201-x.](https://www.nature.com/articles/s41551-024-01201-x)
+
+[Wan, F.; Torres, M. D. T.; Guan, C.; de la Fuente-Nunez, C. Tutorial: guidelines for the use of machine learning methods to mine genomes and proteomes for antibiotic discovery. Nature Protocols, 20, 2685-2697, 2025. DOI: 10.1038/s41596-025-01144-w.](https://www.nature.com/articles/s41596-025-01144-w)
+
+[Guan, C.; Torres, M.D.T.; Li, S.; de la Fuente-Nunez, C. Computational exploration of global venoms for antimicrobial discovery with Venomics artificial intelligence. Nature Communications, 16, 6446, 2025. DOI: 10.1038/s41467-025-60051-6.](https://www.nature.com/articles/s41467-025-60051-6)
+
+[Torres, M. D. T.; Wan, F.; de la Fuente-Nunez, C. Deep learning reveals antibiotics in the archaeal proteome, Nature Microbiology, 10, 2153-2167, 2025. DOI: https://doi.org/10.1038/s41564-025-02061-0](https://doi.org/10.1038/s41564-025-02061-0)
+
+[Cesaro, A.; Wan, F.; Torres, M.D.T.; de la Fuente-Nunez, C. Design of multimodal antibiotics against intracellular infections using deep learning. bioRXiv, 2025.](https://www.biorxiv.org/content/10.1101/2024.12.20.629780v2)
+
+[Leng, T.; Wan, F.; Torres, M. D. T.; de la Fuente-Nunez, C. Predicting and generating antibiotics against future pathogens with ApexOracle. arXiv, 2025.](https://arxiv.org/abs/2507.07862)
+
+[Torres, M.D.T.; Zeng, Y.; Wan, F.; Maus, N.; Gardner, J.; de la Fuente-Nunez, C. A generative artificial intelligence approach for antibiotic optimization. bioRXiv, 2025.](https://www.biorxiv.org/content/10.1101/2024.11.27.625757v1)
+
+[Xia, X.; Torres, M.D.T.; de la Fuente-Nunez, C. Proteasome-derived antimicrobial peptides discovered via deep learning. bioRXiv, 2025.](https://www.biorxiv.org/content/10.1101/2025.03.17.643752v1.abstract)`,
+    molecularDeExtinctionContent: `
+[Maasch, J.R.M.A.; Torres, M.D.T.; Melo, M.C.R.; de la Fuente-Nunez, C. Molecular de-extinction of ancient antimicrobial peptides enabled by machine learning. Cell Host Microbe, v. 31, i. 8, p. 1260-1274.E6, 2023. DOI: 10.1016/j.chom.2023.07.001](https://www.sciencedirect.com/science/article/pii/S1931312823002962?via%3Dihub)
+
+[Torrance, A.W.; de la Fuente-Nunez, C. The patentability and bioethics of molecular de-extinction. Nature Biotechnology, 42, 1179-1180, 2024. DOI: 10.1038/s41587-024-02332-x](https://www.nature.com/articles/s41587-024-02332-x)`,
+    encryptedPeptidesContent: `
+[Torres, M.D.T.; Melo, M.C.R.; Flowers, L.; Crescenzi, O.; Notomista, E.; de la Fuente-Nunez, C. Mining for encrypted peptide antibiotics in the human proteome. Nature Biomedical Engineering, v. 6, i. 1, p. 67-75, 2022. DOI: 10.1038/s41551-021-00801-1](https://www.nature.com/articles/s41551-021-00801-1)
+
+[Torres, M.D.T.; Cesaro, A.; de la Fuente-Nunez, C. Encrypted peptides from the human proteome target infections through antimicrobial and immunomodulatory properties. Trends in Biotechnology, 2024. DOI: 10.1016/j.tibtech.2024.09.008](https://www.cell.com/trends/biotechnology/fulltext/S0167-7799(24)00251-8)
+
+[Torres, M.D.T.; Brooks, E.; Cesaro, A.; Sberro, H.; Nicolaou, C.; Bhatt, A.S.; de la Fuente-Nunez, C. Human gut metagenomic mining reveals an untapped source of peptide antibiotics. Cell, v. 187, i. 19, p. 5453-5467.E152024. DOI: 10.1016/j.cell.2024.07.027](https://www.cell.com/cell/fulltext/S0092-8674(24)00802-X)
+
+[Santos-Junior, C.D.; Torres, M.D.T.; Duas, Y.; del Rio, A.R.; Schmidt, T.S.B.; Chong, H.; Fullam, A.; Kuhn, M.; Zhu, C.; Houseman, A.; Somborski, J.; Vines, A.; Zhao, X.M.; Bork, P.; Huerta-Cepas, J.; de la Fuente-Nunez, C., Coelho, L.P. Computational exploration of the global microbiome for antibiotic discovery. Cell, v. 187, i. 14, p. 3761-3778.E16, 2024. DOI: 10.1016/j.cell.2024.05.013](https://www.cell.com/cell/fulltext/S0092-8674(24)00522-1)`,
+}
+
+const statsTexts = {
+    pageTitle: "Stats",
+    activeInactiveChartTitle: "Active vs Inactive Distribution",
+    micDistributionChartTitle: "Activity Value Frequency (μmol L-1)",
+    aminoAcidFrequencyChartTitle: "Amino Acid Residue Frequency",
+    aminoAcidCompositionChartTitle: "Amino Acid Composition",
+    lengthDistributionChartTitle: "Length Distribution",
+    featureDistributionTitle: "Feature Distribution",
+    frequencyLabel: "Frequency",
+    normalizedFrequencyLabel: "Normalized Frequency",
+    lengthLabel: "Length",
+    numberOfOccurrencesLabel: "Number of Occurrences",
+    violinChartTitles: {
+        tiltAngle: "Tilt Angle",
+        propensityToPPIICoil: "Propensity to PPII coil",
+        propensityToInVitroAggregation: "Propensity to In Vitro Aggregation",
+        penetrationDepth: "Penetration Depth",
+        normalizedHydrophobicity: "Normalized Hydrophobicity",
+        normalizedHydrophobicMoment: "Normalized Hydrophobic Moment",
+        netCharge: "Net Charge",
+        linearMoment: "Linear Moment",
+        isoelectricPoint: "Isoelectric Point",
+        disorderedConformationPropensity: "Disordered Conformation Propensity",
+        angleSubtendedByHydrophobicResidues: "Angle Subtended by the Hydrophobic Residues",
+        amphiphilicityIndex: "Amphiphilicity Index",
+    }
+}
+
+const peptideDetailsTexts = {
+    detailsIntro: "Here are the details for peptide:",
+}
+
+const navbarTexts = {
+    brandName: "ApexSearch",
+    menuItems: {
+        home: "Home",
+        apexDb: "ApexDB",
+        stats: "ApexDB Stats",
+        publications: "Publications",
+        about: "The Lab",
+    }
+}
+
+const footerTexts = {
+    copyright: "© 2023 The Trustees of the University of Pennsylvania. All Rights Reserved. Created by Dr. Cesar de la Fuente/Machine Biology Group/de la Fuente Lab.",
+}
+
+const citationsTexts = {
+    heading: "Please cite: ",
+}
+
+const apexDbHeaderTexts = {
+    title: "Database",
+    description: "All the sequences used to train Apex.",
+    downloadButton: "Download Database.csv",
+}
+
+const apexDbFiltersTexts = {
+    targetPathogenLabel: "Target Pathogen",
+    targetPathogenPlaceholder: "Select one or multiple",
+    sequenceLabel: "Sequence",
+    sequencePlaceholder: "Enter sequence or motif",
+    physicochemicalFeaturesButton: "Physicochemical Features",
+    filterLabels: {
+        id: "ID",
+        length: "Length",
+        activityRange: "Activity range",
+        netCharge: "Net Charge",
+        normalizedHydrophobicity: "Normalized hydrophobicity",
+        normalizedHydrophobicMoment: "Normalized hydrophobic moment",
+        amphiphilicityIndex: "Amphiphilicity index",
+        isoelectricPoint: "Isoelectric point",
+        penetrationDepth: "Penetration depth",
+        tiltAngle: "Tilt Angle",
+        disorderedConformationPropensity: "Disordered conformation propensity",
+        linearMoment: "Linear moment",
+        propensityToInVitroAggregation: "Propensity to in vitro aggregation",
+        angleSubtendedByHydrophobicResidues: "Angle subtended by hydrophobic residues",
+        propensityToPPIICoil: "Propensity to polyproline type II coil",
+    },
+    filterPlaceholders: {
+        id: "1, 1-100, 50-",
+        length: "2, 2-50, 5-",
+        activityRange: "2, 2-50, 5-",
+    }
+}
+
+const dropzoneTexts = {
+    processing: "Processing...",
+    dropFile: "Drop file",
+    toUpload: "to upload",
+    clickToUpload: "Click to upload",
+    dragAndDrop: "drag and drop",
+    fastaFilesOnly: "FASTA files only",
+    fileTooLargePrefix: "File \"",
+    fileTooLargeSuffix: "\" is too large. Maximum file size is 50MB.",
+    invalidFileSuffix: " is not a valid FASTA file",
+}
+
+const chartTexts = {
+    // Chart titles are in statsTexts
+}
+
+const commonTexts = {
+    view: "View",
+    submit: "Submit",
+    download: "Download",
+    select: "Select...",
 }
 
 const ApexDbTexts = {
@@ -85,6 +246,18 @@ const ApexDbTexts = {
 export const appTexts = {
     homeTexts,
     aboutTexts,
+    sequenceFormTexts,
+    publicationsTexts,
+    statsTexts,
+    peptideDetailsTexts,
+    navbarTexts,
+    footerTexts,
+    citationsTexts,
+    apexDbHeaderTexts,
+    apexDbFiltersTexts,
+    dropzoneTexts,
+    chartTexts,
+    commonTexts,
     ApexDbTexts,
 }
 

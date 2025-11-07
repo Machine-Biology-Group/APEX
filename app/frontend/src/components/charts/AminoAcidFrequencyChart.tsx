@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { aminoAcidFrequencyData } from '../../data/chartData';
+import {appTexts} from "../../texts";
 
 export const AminoAcidFrequencyChart: FC = () => {
+    const texts = appTexts.statsTexts;
     return (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 h-[600px] flex flex-col">
-            <h2 className="text-lg font-semibold mb-4 text-gray-800">Amino Acid Residue Frequency</h2>
+            <h2 className="text-lg font-semibold mb-4 text-gray-800">{texts.aminoAcidFrequencyChartTitle}</h2>
             <div className="flex-1">
                 <Bar 
                     data={aminoAcidFrequencyData} 
@@ -31,7 +33,7 @@ export const AminoAcidFrequencyChart: FC = () => {
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Frequency'
+                                    text: texts.frequencyLabel
                                 }
                             }
                         }

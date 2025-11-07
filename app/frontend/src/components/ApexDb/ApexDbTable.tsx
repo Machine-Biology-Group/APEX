@@ -101,7 +101,7 @@ export const ApexDbTable: FC<SearchTableProps> = ({className}) => {
                                     >
                                         <Link to={"/ApexDb/" + entry.id}
                                               className="text-indigo-600 hover:text-indigo-900">
-                                            View<span className="sr-only">, {entry.id}</span>
+                                            {appTexts.commonTexts.view}<span className="sr-only">, {entry.id}</span>
                                         </Link>
                                     </td>
                                 </tr>

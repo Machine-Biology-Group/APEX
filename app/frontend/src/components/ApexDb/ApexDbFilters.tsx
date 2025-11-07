@@ -5,6 +5,7 @@ import {TextRangeInput} from "@components/dumb-components/inputs/TextRangeInput.
 import {AppSelect} from "@components/dumb-components/inputs/AppSelect.tsx";
 import {TextInput} from "@components/dumb-components/inputs/TextInput.tsx";
 import {ChevronRightIcon} from "@heroicons/react/24/outline";
+import {appTexts} from "../../texts";
 
 export type FiltersProps = {
     className?: string
@@ -16,6 +17,7 @@ export const ApexDbFilters: FC<FiltersProps> = ({className}) => {
         setFilters,
     } = useApexDbContext();
     const [showPhysicochemical, setShowPhysicochemical] = useState(false);
+    const filterTexts = appTexts.apexDbFiltersTexts;
 
     const handleRangeFilterChange = (minField, maxField, min: number, max: number) => {
             setFilters({
@@ -49,17 +51,17 @@ export const ApexDbFilters: FC<FiltersProps> = ({className}) => {
 
     return (
         <div className={clsx(className, "flex flex-col gap-4")}>
-            <AppSelect label="Target Pathogen" options={activitySelectOptions} placeholder="Select one or multiple" onChange={handleActivitiesSelectFilterChange}/>
-            <TextInput label="Sequence" placeholder="Enter sequence or motif" value={filters.sequence}
+            <AppSelect label={filterTexts.targetPathogenLabel} options={activitySelectOptions} placeholder={filterTexts.targetPathogenPlaceholder} onChange={handleActivitiesSelectFilterChange}/>
+            <TextInput label={filterTexts.sequenceLabel} placeholder={filterTexts.sequencePlaceholder} value={filters.sequence}
                        onChange={(event) => handleTextFilterChange('sequence', event.target.value)}/>
                 {/*<TextInput label="Source organism" placeholder="Enter source organism name"*/}
                 {/*           onChange={(event) => handleTextFilterChange('sourceOrganism', event.target.value)}/>*/}
             {basicFilters.map((filterName) => (
                 <TextRangeInput
                     key={filterMapping[filterName].label}
-                    label={filterMapping[filterName].label}
+                    label={filterTexts.filterLabels[filterName as keyof typeof filterTexts.filterLabels]}
                     onChange={(min, max) => handleRangeFilterChange(filterMapping[filterName].min, filterMapping[filterName].max, min, max)}
-                    placeholder={filterMapping[filterName].placeholder}
+                    placeholder={filterMapping[filterName].placeholder || filterTexts.filterPlaceholders[filterName as keyof typeof filterTexts.filterPlaceholders]}
                 />
             ))}
 
@@ -73,7 +75,7 @@ export const ApexDbFilters: FC<FiltersProps> = ({className}) => {
                         showPhysicochemical && "transform rotate-90"
                     )}
                 />
-                Physicochemical Features
+                {filterTexts.physicochemicalFeaturesButton}
             </button>
 
             {showPhysicochemical && (
@@ -81,7 +83,7 @@ export const ApexDbFilters: FC<FiltersProps> = ({className}) => {
                     {physicochemicalFilters.map((filterName) => (
                         <TextRangeInput
                             key={filterMapping[filterName].label}
-                            label={filterMapping[filterName].label}
+                            label={filterTexts.filterLabels[filterName as keyof typeof filterTexts.filterLabels]}
                             onChange={(min, max) => handleRangeFilterChange(filterMapping[filterName].min, filterMapping[filterName].max, min, max)}
                             placeholder={filterMapping[filterName].placeholder}
                         />
