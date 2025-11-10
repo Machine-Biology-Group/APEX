@@ -1,8 +1,9 @@
 import {Database, DbEntry} from "./models";
 
-async function loadDb(): Promise<Database> {
+async function loadDb(filepath: string): Promise<Database> {
     // load csv file function
-    const text = await fetch('/APEXDB.csv').then((response) => response.text());
+    filepath = filepath || '/APEXDB.csv';
+    const text = await fetch(filepath).then((response) => response.text());
     const entries: DbEntry[] = [];
     const entriesArray: string[][] = [];
 
