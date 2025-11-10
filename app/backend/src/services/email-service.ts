@@ -49,8 +49,8 @@ async function sendEmail(message: Mail.Options) {
         requireTLS: true,
         port: 465,
         auth: {
-            user: "staffwerke",
-            pass: process.env.EMAIL_PROVIDER_API_KEY,
+            user: process.env.EMAIL_PROVIDER_USERNAME,
+            pass: process.env.EMAIL_PROVIDER_PASSWORD,
         }
     });
 

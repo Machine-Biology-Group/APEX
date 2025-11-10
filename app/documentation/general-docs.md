@@ -7,7 +7,7 @@ This document describes how to change the email provider from DuoCircle (current
 The application currently uses DuoCircle as the email provider with the following configuration:
 - **Host**: `outbound.mailhop.org`
 - **Port**: 465 (SSL)
-- **Authentication**: Username `staffwerke` with API key from `EMAIL_PROVIDER_API_KEY` environment variable
+- **Authentication**: username and password provided via environment variables
 - **Security**: SSL/TLS enabled
 
 ## Steps to Change to In-House Email Provider
@@ -23,16 +23,17 @@ If you need email functionality working immediately, you can register for a DuoC
 ### 2. Backend Configuration Changes
 
 #### Update Environment Variables
-Replace the `EMAIL_PROVIDER_API_KEY` with in-house email server credentials:
+Replace the `EMAIL_PROVIDER_PASSWORD` and `EMAIL_PROVIDER_USERNAME` with in-house email server credentials:
 
 ```bash
 # Old DuoCircle configuration
-EMAIL_PROVIDER_API_KEY=qweqwqweqwe
+EMAIL_PROVIDER_USERNAME=upennduocircle
+EMAIL_PROVIDER_PASSWORD=qweqwqweqwe
 
 # New in-house configuration
 EMAIL_HOST=your-smtp-server.internal
 EMAIL_PORT=587
-EMAIL_USER=your-email-user
+EMAIL_USERNAME=your-email-user
 EMAIL_PASSWORD=your-email-password
 EMAIL_FROM=no-reply@yourdomain.internal
 ```
@@ -72,8 +73,7 @@ EMAIL_USER=your-email-user
 EMAIL_PASSWORD=your-email-password
 EMAIL_FROM=no-reply@yourdomain.internal
 
-# Remove or comment out the old DuoCircle key
-# EMAIL_PROVIDER_API_KEY=qweqwqweqwe
+# Remove or comment out the old DuoCircle variables
 ```
 ### 4. Deployment Considerations
 

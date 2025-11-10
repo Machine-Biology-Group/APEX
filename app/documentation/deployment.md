@@ -84,7 +84,8 @@ VITE_BACKEND_BASE_URL=http://localhost:10000  -  this is the base url for the ba
 
 Backend project variables. Check .env.example to see how they look like.
 DATABASE_URL="file:../jobs.db" - this is the path to the database file.
-EMAIL_PROVIDER_API_KEY=qweqwqweqwe - this is the api key for the email provider api (currently duocircle).
+EMAIL_PROVIDER_USERNAME=upennduocircle - username for the email provider api (currently duocircle).
+EMAIL_PROVIDER_PASSWORD=qweqwqweqwe - this is the api key for the email provider api (currently duocircle).
 LSF_CLUSTER_BASE_PATH=H:\Projects\anne\upenn\backend\src\tests\test-files - this is the path to the lsf cluster. It is used to determine file paths for input and output files
 FILE_CLEANUP_PERIOD_DAYS=7 - this is the number of days after which the files will be deleted.
 RATE_LIMIT_MAX_REQUESTS=100 - this is the maximum number of requests allowed in 24 hours per IP address.

@@ -19,7 +19,8 @@ The application supports two modes:
 ### Environment Variables
 
 - `DATABASE_URL`: Database URL in format "file:/path/to/database.db"
-- `EMAIL_PROVIDER_API_KEY`: API key for the email provider api (currently duocircle).
+- `EMAIL_PROVIDER_USERNAME`: username for the email provider api (currently duocircle).
+- `EMAIL_PROVIDER_PASSWORD`: password for the email provider api (currently duocircle).
 - `LSF_CLUSTER_BASE_PATH`: Path to the lsf cluster. It is used to determine file paths for input and output files
 - `FILE_CLEANUP_PERIOD_DAYS`: Number of days after which the files will be deleted.
 - `RATE_LIMIT_MAX_REQUESTS`: Maximum number of requests per IP address in 24 hours (defaults to 100)
