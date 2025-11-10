@@ -1,3 +1,28 @@
+# Addin new tab for the Apex 2.0 data set
+1. go to NavBar.tsx and add a new link. Make sure the text for apex2 is defined in texts.ts
+```
+{path: "/apex2", title: navbarTexts.menuItems.apex2},
+```
+2. go to ApexDbPage.tsx and copy that file into the same folder.
+3. change ApexDbPage - Copy.tsx to a more appropriate name (e.g. Apex2Page) and change the component name inside that file accordingly:
+```
+export const Apex2Page: FC<SearchTableProps> = ({ }) => {
+```
+4. Add new dataset to the public directory (e.g. apex2.csv)
+5. change the database path in your new Apex2Page component:
+```
+dbService.loadDb("/apex2.csv").then((db) => {
+```
+6. Add a new router entry in the router.tsx:
+```
+            {
+                path: "/database2",
+                element: <Apex2Page/>,
+            },
+```
+you're good to go!
+
+
 # Changing email provider
 
 ## Overview
@@ -18,7 +43,7 @@ If you need email functionality working immediately, you can register for a DuoC
 2. Navigate to their API/SMTP settings section
 3. Generate a new API key for SMTP authentication
 4. Update your environment variables with the new API key
-5. Test email functionality
+5. Test. email functionality
 
 ### 2. Backend Configuration Changes
 
