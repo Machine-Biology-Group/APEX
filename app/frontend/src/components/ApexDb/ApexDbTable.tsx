@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import clsx from "clsx";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useApexDbContext} from "@components/ApexDb/apexDbContext.tsx";
 import {appTexts} from "../../texts.ts";
 import {ChevronDownIcon, ChevronUpIcon} from "@heroicons/react/20/solid";
@@ -19,6 +19,7 @@ const fields = [
 
 export const ApexDbTable: FC<SearchTableProps> = ({className}) => {
     const {paginatedEntries, sortSettings, changeSortSettings} = useApexDbContext();
+    const { dataset } = useParams<{ dataset?: string }>();
     const dbEntries = paginatedEntries;
 
     return (
@@ -99,7 +100,7 @@ export const ApexDbTable: FC<SearchTableProps> = ({className}) => {
                                             'relative whitespace-nowrap py-4 pl-4 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8',
                                         )}
                                     >
-                                        <Link to={"/ApexDb/" + entry.id}
+                                        <Link to={`/database/${dataset}/${entry.id}`}
                                               className="text-indigo-600 hover:text-indigo-900">
                                             {appTexts.commonTexts.view}<span className="sr-only">, {entry.id}</span>
                                         </Link>

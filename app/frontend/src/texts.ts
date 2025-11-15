@@ -121,6 +121,7 @@ const statsTexts = {
 
 const peptideDetailsTexts = {
     detailsIntro: "Here are the details for peptide:",
+    goBack: "Go Back",
 }
 
 const navbarTexts = {
@@ -199,6 +200,8 @@ const commonTexts = {
     submit: "Submit",
     download: "Download",
     select: "Select...",
+    loadingDataset: "Loading dataset...",
+    errorLoadingDataset: "Error loading dataset:",
 }
 
 const ApexDbTexts = {

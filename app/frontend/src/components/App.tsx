@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { RouterProvider } from "react-router-dom";
-import { Database } from "../logic/models";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { router } from "./router";
-import dbService from "../logic/db-service";
-import { ApexDbContextProvider } from "@components/ApexDb/apexDbContext.tsx";
-import ScrollToTop from "@components/ScrollToTop.tsx";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      gcTime: 1000 * 60 * 60,
+    },
+  },
+});
 
 function App() {
-
-
     return (
-        <>
+        <QueryClientProvider client={queryClient}>
             <RouterProvider router={router} />
-        </>
+        </QueryClientProvider>
     );
 }
 

@@ -1,24 +1,29 @@
 # Addin new tab for the Apex 2.0 data set
-1. go to NavBar.tsx and add a new link. Make sure the text for apex2 is defined in texts.ts
+1. add new text into texts.ts for a Navigation label:
 ```
-{path: "/apex2", title: navbarTexts.menuItems.apex2},
+const navbarTexts = {
+    brandName: "ApexSearch",
+    menuItems: {
+        home: "Home",
+   >>>  apexDb2: "NEW ApexDB", <<<
+        apexDb: "ApexDB",
+        stats: "ApexDB Stats",
+        publications: "Publications",
+        about: "The Lab",
+    }
+}
 ```
-2. go to ApexDbPage.tsx and copy that file into the same folder.
-3. change ApexDbPage - Copy.tsx to a more appropriate name (e.g. Apex2Page) and change the component name inside that file accordingly:
+2. go to NavBar.tsx and add a new link.
 ```
-export const Apex2Page: FC<SearchTableProps> = ({ }) => {
+{path: "/database/apex-db-2", title: navbarTexts.menuItems.apexDb2},
 ```
-4. Add new dataset to the public directory (e.g. apex2.csv)
-5. change the database path in your new Apex2Page component:
+3. Copy  new dataset csv to the "public" directory (e.g. apex2.csv)
+4. Add new dataset into datasets.ts definition file. The name of the dataset should match the path you have specified in the step 2 (navbar link).
 ```
-dbService.loadDb("/apex2.csv").then((db) => {
-```
-6. Add a new router entry in the router.tsx:
-```
-            {
-                path: "/database2",
-                element: <Apex2Page/>,
-            },
+  {
+    name: 'apex-db-2',
+    filePath: '/apex2.csv',
+  }
 ```
 you're good to go!
 

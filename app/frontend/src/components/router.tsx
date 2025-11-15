@@ -19,11 +19,11 @@ export const router = createHashRouter([
                 element: <Home/>,
             },
             {
-                path: "/database",
+                path: "/database/:dataset?",
                 element: <ApexDbPage/>,
             },
             {
-                path: "/ApexDb/:id",
+                path: "/database/:dataset/:id",
                 element: <PeptideDetails/>,
             },
             {

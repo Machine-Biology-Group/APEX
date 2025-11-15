@@ -32,7 +32,7 @@ export const Navbar: FC<NavbarProps> = ({}) => {
     const navbarTexts = appTexts.navbarTexts;
     const pages = [
         {path: "/home", title: navbarTexts.menuItems.home},
-        {path: "/database", title: navbarTexts.menuItems.apexDb},
+        {path: "/database/apexdb", title: navbarTexts.menuItems.apexDb},
         {path: "/stats", title: navbarTexts.menuItems.stats},
         {path: "/publications", title: navbarTexts.menuItems.publications},
         {path: "/about", title: navbarTexts.menuItems.about}
