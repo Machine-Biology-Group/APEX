@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { FastaDropzone } from './Dropzone';
 import { Loader2 } from 'lucide-react';
+import { InfoIcon } from '@components/dumb-components/InfoIcon';
 import {appTexts} from "../../texts";
 
 type InputType = 'text' | 'file' | null;
@@ -83,34 +84,47 @@ export const SequenceForm: FC = () => {
 
     return (
         <section className="h-[90vh] flex flex-col items-center justify-center px-4 mt-[-100px]">
-            <h1 className="text-3xl text-gray-800 mb-8">{texts.title}</h1>
-            
+            <div className="flex items-center justify-center mb-8 gap-2">
+                <h1 className="text-3xl text-gray-800">{texts.title}</h1>
+                <InfoIcon tooltip={texts.titleTooltip} />
+            </div>
+
             <div className="w-full max-w-2xl space-y-4">
-                <input
-                    type="email"
-                    placeholder={texts.emailPlaceholder}
-                    className="w-full p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2 border-gray-200"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+                <div className="flex items-center gap-2">
+                    <input
+                        type="email"
+                        placeholder={texts.emailPlaceholder}
+                        className="w-full p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <InfoIcon tooltip={texts.emailTooltip} />
+                </div>
 
                 {showTextArea && (
                     <div>
-                        <textarea
-                            className="w-full h-24 p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2 border-gray-200"
-                            placeholder={texts.sequencePlaceholder}
-                            value={textContent}
-                            maxLength={20000}
-                            onChange={(e) => {
-                                const value = e.target.value.slice(0, 20000);
-                                setTextContent(value);
-                                setInputType('text');
-                                setStatus('idle');
-                            }}
-                        />
-                        <p className="text-xs text-gray-400 text-right mt-1">
-                            {textContent.length}{texts.characterCount}
-                        </p>
+                        <div className="flex gap-2">
+                            <div className="flex-1">
+                                <textarea
+                                    className="w-full h-24 p-3 border border-primary-300 rounded-xl resize-none focus:outline-none focus:ring-2"
+                                    placeholder={texts.sequencePlaceholder}
+                                    value={textContent}
+                                    maxLength={20000}
+                                    onChange={(e) => {
+                                        const value = e.target.value.slice(0, 20000);
+                                        setTextContent(value);
+                                        setInputType('text');
+                                        setStatus('idle');
+                                    }}
+                                />
+                                <p className="text-xs text-gray-400 text-right mt-1">
+                                    {textContent.length}{texts.characterCount}
+                                </p>
+                            </div>
+                            <div className="flex items-center h-24">
+                                <InfoIcon tooltip={texts.sequenceTooltip} />
+                            </div>
+                        </div>
                     </div>
                 )}
 

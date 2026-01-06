@@ -42,8 +42,13 @@ Website: [delafuentelab.seas.upenn.edu](https://delafuentelab.seas.upenn.edu/)
 
 const sequenceFormTexts = {
     title: "Discover your own antibiotics",
+    titleTooltip: "Here you can upload your sequences and have them analyzed by our AI. You will receive results in your email.",
+    emailLabel: "Email",
     emailPlaceholder: "Enter your email",
+    emailTooltip: "We will use this email to send you the results of your analysis.",
+    sequenceLabel: "Sequence",
     sequencePlaceholder: "Enter your sequence in FASTA format here...",
+    sequenceTooltip: "You can upload a FASTA file or enter your sequence manually. The sequence should be in FASTA format.",
     characterCount: "/20000",
     submitting: "Submitting...",
     submitButton: "Submit",
@@ -137,6 +142,7 @@ const navbarTexts = {
 
 const footerTexts = {
     copyright: "© 2023 The Trustees of the University of Pennsylvania. All Rights Reserved. Created by Dr. Cesar de la Fuente/Machine Biology Group/de la Fuente Lab.",
+    legalLink: "Legal",
 }
 
 const citationsTexts = {
@@ -204,6 +210,38 @@ const commonTexts = {
     errorLoadingDataset: "Error loading dataset:",
 }
 
+const cookieBannerTexts = {
+    message: "This site uses cookies for enhanced functionality and protection.",
+    dismissButton: "Dismiss",
+}
+
+const legalTexts = {
+    pageTitle: "Legal",
+    content: `## Terms and Conditions
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+## Privacy Policy
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## Cookie Policy
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+## Disclaimer
+
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+
+## Intellectual Property
+
+At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+
+## Contact Information
+
+Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.`
+}
+
 const ApexDbTexts = {
     filters: {
         title: "Filters",
@@ -262,6 +300,8 @@ export const appTexts = {
     chartTexts,
     commonTexts,
     ApexDbTexts,
+    cookieBannerTexts,
+    legalTexts,
 }
 
 

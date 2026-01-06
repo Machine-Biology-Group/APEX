@@ -8,6 +8,7 @@ import {About} from "./pages/About";
 import HomePageNewPage from "./pages/Home.tsx";
 import Publications from "./pages/Publications.tsx";
 import Home from "./pages/Home.tsx";
+import Legal from "./pages/Legal.tsx";
 
 export const router = createHashRouter([
     {
@@ -41,6 +42,10 @@ export const router = createHashRouter([
             {
                 path: "/publications",
                 element: <Publications/>,
+            },
+            {
+                path: "/legal",
+                element: <Legal/>,
             },
         ]
     },
