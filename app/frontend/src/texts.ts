@@ -42,13 +42,13 @@ Website: [delafuentelab.seas.upenn.edu](https://delafuentelab.seas.upenn.edu/)
 
 const sequenceFormTexts = {
     title: "Discover your own antibiotics",
-    titleTooltip: "Here you can upload your amino-acid sequences and have them analyzed by our AI. This may take a few minutes. Once it is done, you will receive the results by email.",
+    titleTooltip: "Here you can upload your peptide/protein sequences (one-letter code amino acid) and have them analyzed by our AI. This may take a few minutes. Once it is done, you will receive the results by email.",
     emailLabel: "Email",
     emailPlaceholder: "Enter your email",
     emailTooltip: "We will use this email to send you the results of your analysis.",
     sequenceLabel: "Sequence",
-    sequencePlaceholder: "Enter your amino-acid sequence in FASTA format here...",
-    sequenceTooltip: "You can upload a FASTA file or enter your amino-acid sequence manually. The sequence should be in FASTA format.",
+    sequencePlaceholder: "Enter your peptide/protein sequence (one-letter code amino acid) in FASTA format here...",
+    sequenceTooltip: "You can upload a FASTA file or enter your peptide/protein sequence (one-letter code amino acid) manually. The sequence should be in FASTA format.",
     characterCount: "/20000",
     submitting: "Submitting...",
     submitButton: "Submit",
